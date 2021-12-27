@@ -5,7 +5,7 @@ def alternate_case(s):
     # Like a Beta Male
     # return s.swapcase()
 
-# Sample w/ 2 pairs found
+# EXAMPLE AND TESTING #
 input = ["Hello World", "cODEwARS"]
 for item in input:
     print("\nInput: {0}\nAlternate Case: {1}".format(item, alternate_case(item)))
