@@ -3,16 +3,14 @@
 ######################################################################
 
 # Rotate a string by one position
-def rotate(string):
-    return string[-1] + string[:-1]
+def rotate(string, n=1):
+    return string[-n:] + string[:-n]
 
 
 def check_for_rotations(s1, s2):
     if len(s2) != len (s1): return False
-    for i in range(len(s1)):
-        s1 = rotate(s1)
-        if s1 == s2: return True
-    return False
+    return any(rotate(s1, i) == s2 for i in range(1, len(s2)))
+
 
 
 ######################################################################
@@ -20,9 +18,9 @@ def check_for_rotations(s1, s2):
 ######################################################################
 
 s1 = "abcd"
-s2 = "cdab"
+s2 = "bcda"
 result = check_for_rotations(s1, s2)
 print("Is --> {0} a rotation of --> {1} ? {2}".format(s2, s1, str(result)))
-assert result == True  # Simple unit test
+# assert result == True  # Simple unit test
 
 # ---------------------------------------------------------------------
