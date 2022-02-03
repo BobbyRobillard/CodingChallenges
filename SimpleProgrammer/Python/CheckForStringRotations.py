@@ -4,7 +4,7 @@
 
 # Rotate a string by one position
 def rotate(string):
-    return string[-1] + string[0:-1]
+    return string[-1] + string[:-1]
 
 
 def check_for_rotations(s1, s2):
