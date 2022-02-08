@@ -1,5 +1,7 @@
 import re
 
+# https://app.codesignal.com/company-challenges/instacart/buphhQWwuZQ7hDTwr
+
 # Working Solution
 # Runtime: 23ms on 20 item list.
 # Memory: 12.2MB
@@ -32,6 +34,9 @@ def solution_incomplete(string):
 
     return total
 
+# ------------------------------------------------------------------------------
+# TESTS and MEMORY USEAGE
+# TO FIND RUNTIME --> (linux cmd) $ time python3 ShoppingList.py
 # ------------------------------------------------------------------------------
 from HelperFunctions import get_memory_used
 
