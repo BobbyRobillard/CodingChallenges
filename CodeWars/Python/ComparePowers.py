@@ -1,7 +1,7 @@
 from math import log
 
 # FIRST CORRECT SOLUTION #
-def compare_powers(n1,n2):
+def compare_powers(n1, n2):
     if n1[0] == n2[0] and n1[0] == 1:
         return 0
 
@@ -15,11 +15,13 @@ def compare_powers(n1,n2):
     res2 = log(n2[0]) * n2[1]
     return 1 if res2 > res1 else (-1 if res1 > res2 else 0)
 
+
 # REFACTORED SOLUTION #
-def compare_powers(n1,n2):
+def compare_powers(n1, n2):
     res1 = log(n1[0]) * n1[1]
     res2 = log(n2[0]) * n2[1]
     return 1 if res2 > res1 else (-1 if res1 > res2 else 0)
+
 
 # EXAMPLE AND TESTING #
 print(

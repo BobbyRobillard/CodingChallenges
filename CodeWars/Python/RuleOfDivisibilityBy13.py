@@ -18,11 +18,16 @@ import math
 #         curr_power += 1
 #     return results_sum
 
+
 def thirt_calculation(n):
     # Reverse number
     reversed = str(n)[::-1]
     # Find repeating sequence (seq.)
-    return sum((int(math.pow(10, curr_power)) % 13) * int(reversed[curr_power]) for curr_power in range(0, len(reversed)))
+    return sum(
+        (int(math.pow(10, curr_power)) % 13) * int(reversed[curr_power])
+        for curr_power in range(0, len(reversed))
+    )
+
 
 def thirt(n):
     numbers_found = []
@@ -33,5 +38,6 @@ def thirt(n):
             return next_result
         numbers_found.append(next_result)
         n = next_result
+
 
 print("\n---Thirt---\n{0}".format(thirt(85299258)))

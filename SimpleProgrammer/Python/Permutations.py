@@ -3,7 +3,7 @@
 ######################################################################
 
 
-def permutations(string, step = 0):
+def permutations(string, step=0):
 
     # if we've gotten to the end, print the permutation
     if step == len(string):

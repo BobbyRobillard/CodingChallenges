@@ -4,7 +4,8 @@
 
 
 def check_for_rotations(s1, s2):
-    if len(s2) != len (s1): return False
+    if len(s2) != len(s1):
+        return False
     return any(s1[-i:] + s1[:-i] == s2 for i in range(1, len(s2)))
 
 

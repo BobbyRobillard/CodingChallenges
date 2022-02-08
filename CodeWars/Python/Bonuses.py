@@ -1,10 +1,11 @@
 import numpy as np
 
+
 def bonus(arr, total):
     eqs = [
         [arr[0], arr[1], arr[2]],
-        [arr[0], -1*arr[1], 0],
-        [0, arr[1], -1*arr[2]],
+        [arr[0], -1 * arr[1], 0],
+        [0, arr[1], -1 * arr[2]],
     ]
     A = np.array(eqs)
     B = np.array([total, 0, 0])
