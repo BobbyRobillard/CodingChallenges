@@ -5,6 +5,10 @@
 # RUNTIME: 40-44ms
 # MEMORY USED: 12.3MB
 # -----------------------------------------------------------------------------
+# ** TO-DO **
+# 1) Fix can_tak_order method, conditions aren't correct
+# 2) Determine if sorting first, or checking during loop is best for ideal matching
+# -----------------------------------------------------------------------------
 import operator
 
 
