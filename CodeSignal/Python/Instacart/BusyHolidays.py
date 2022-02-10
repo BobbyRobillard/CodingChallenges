@@ -6,8 +6,8 @@
 # MEMORY USED: 12.3MB
 # -----------------------------------------------------------------------------
 # ** TO-DO **
-# 1) Fix can_tak_order method, conditions aren't correct
-# 2) Determine if sorting first, or checking during loop is best for ideal matching
+# 1) Fix can_take_order method, conditions aren't correct
+# 2) Check during loop for ideal match
 # -----------------------------------------------------------------------------
 import operator
 
@@ -18,41 +18,43 @@ def conv_to_sec(time_to_conv):
     return int(time_to_conv[0])*60*60 + int(time_to_conv[1])*60
 
 
-def can_tak_order(shopper, order):
-    # a) order start time <= shopper start time
-    if conv_to_sec(order[0]) <= conv_to_sec(shopper[0]):
-        # b) order start time + order fill time <= shopper end time
-        if conv_to_sec(order[0]) + order[2] <= conv_to_sec(shopper[1]):
-            # c) shopper start time + order fill time <= order end time
-            if conv_to_sec(shopper[0]) + order[2] <= conv_to_sec(order[1]):
-                return True
+def can_tak_order(shopper, order, leadTime):
+    # a) shopper start time >= order start time
+    # b) order end time +
     return False
 
 
-def solution(shoppers, orders, leadTime):
-    # boundry checks
+# Try to find the ideal shopper to take the order
+def find_matching_shopper(shoppers, order, leadTime):
+    best_shopper = None
+    for s in shoppers:
+        if can_tak_order(s, order, leadTime):
+            if best_shopper == None: # Default to first if not set
+                best_shopper = s
+            else: # Compare current best with current shopper
+                if conv_to_sec(best_shopper[1]) >= conv_to_sec(s[1]):
+                    best_shopper = s
+    return best_shopper
+
+
+def solution(shoppers, orders, leadTimes):
+    # Boundry checks
     if len(shoppers) < len(orders): return False
     if len(orders) == 0 or orders == None: return True
-    # add leadTime to each order, simplifying function
-    for i, t in enumerate(leadTime):
-        orders[i].append(t)
-    # sort shoppers by start time, secondly by end time
-    shoppers.sort(key = operator.itemgetter(0, 1))
-    # sort orders by start time, secondly by end time
-    orders.sort(key = operator.itemgetter(0, 1))
-    # try to make ideal matches between orders and shoppers
+    # Try to make ideal matches between orders and shoppers
     while len(orders) > 0:
-        for order in orders:
-            order_complete = False
-            for shopper in shoppers:
-                if can_tak_order(shopper, order):
-                    # remove the order, and the shopper who filled it
-                    shoppers.remove(shopper)
-                    orders.remove(order)
-                    order_complete = True
-                    break
-            if not order_complete: return False # no shopper could take order
-    # Able to match shoppers w/ orders
+        if len(shoppers) == 0: return False # We've run out of shoppers
+        for i, order in enumerate(orders):
+            matched_shopper = find_matching_shopper(shoppers, order, leadTimes[i])
+            print("Matched Shopper:", matched_shopper, "with order:", order)
+            # Make sure a match was found
+            if matched_shopper == None: return False
+            # Remove matched items
+            shoppers.remove(matched_shopper)
+            del orders[i]
+            del leadTimes[i]
+
+    # Able to match all orders with a shopper
     return True
 
 # -----------------------------------------------------------------------------
