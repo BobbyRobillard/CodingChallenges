@@ -5,3 +5,5 @@ def solution(n):
     a,b = n[:len(n)//2], n[len(n)//2:]
     a,b = list(map(int, a)), list(map(int, b))
     return sum(a) == sum(b)
+
+print(solution(5))
