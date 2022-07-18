@@ -1,28 +1,31 @@
 # ----------------------------------------------
-#           RECURSIVE DFS
+#           RECURSIVE BFS
 # ----------------------------------------------
 
-def dfs(root):
-    if not root:
-        return []
-    left_values = dfs(root.left)
-    right_values = dfs(root.right)
-    return [root] + left_values + right_values
+# def bfs(root):
+#     if not root:
+#         return []
+#     left_values = dfs(root.left)
+#     right_values = dfs(root.right)
+#     return [root] + left_values + right_values
 
 # ----------------------------------------------
-#           ITERATIVE DFS
+#           ITERATIVE BFS
 # ----------------------------------------------
 
-def dfs(root):
+def bfs(root):
+    if not root: return []
+
     result = []
-    stack = [root]
-    while stack:
-        curr = stack.pop()
+    queue = [root]
+   
+    while queue:
+        curr = queue.pop(0)
         result.append(curr)
         if curr.left:
-            stack.insert(0, curr.left)
+            queue.append(curr.left)
         if curr.right:
-            stack.insert(0, curr.right)
+            queue.append(curr.right)
     return result
 
 # ----------------------------------------------
@@ -37,12 +40,12 @@ class Node:
     def __str__(self):
         return str(self.val)
 
-a = Node(5)
-b = Node(1)
-c = Node(2)
-d = Node(6)
-e = Node(8)
-f = Node(3)
+a = Node('A')
+b = Node('B')
+c = Node('C')
+d = Node('D')
+e = Node('E')
+f = Node('F')
 
 a.left = b
 a.right = c
@@ -52,5 +55,5 @@ b.right = e
 
 c.left = f
 
-for item in dfs(a):
+for item in bfs(a):
     print(item)
