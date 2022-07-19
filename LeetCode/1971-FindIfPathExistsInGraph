@@ -1,12 +1,23 @@
+""" 
+LeetCode - 1971
+----------------
+Given edges and the integers n, source, and destination, 
+return true if there is a valid path from source to destination, or false otherwise.
+"""
+
 from collections import defaultdict
+
 
 def validPath(n, edges, src, dst):
 
+    # Create the graph
     neighbors = defaultdict(list)
     for n1, n2 in edges:
         neighbors[n1].append(n2)
         neighbors[n2].append(n1)
 
+    # Use Depth First Search to determine if there is a path to the node.
+    # Use visited to avoid infinite cycles.
     visited = set()
     def dfs(node):
         if node == dst: return True
@@ -17,6 +28,12 @@ def validPath(n, edges, src, dst):
                 if result: return True
     
     return dfs(src)
+
+
+# --------------------------------------
+#               DRIVER CODE
+# --------------------------------------
+
 
 tests = [
     {
