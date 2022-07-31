@@ -20,6 +20,25 @@ class Solution:
         curr = curr.next.next
         return head
 
+    def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+        newHead = ListNode()
+        newHead.next = head
+        slow = fast = newHead
+        # Set gap between pointers
+        while n > 0:
+            n -= 1
+            fast = fast.next
+        # Have slow pointer catch up to gap
+        while fast.next:
+            fast = fast.next
+            slow = slow.next
+        slow.next = slow.next.next
+        return newHead.next
+        
+        
+        
+        
+
 
 a = ListNode(1)
 b = ListNode(2)
