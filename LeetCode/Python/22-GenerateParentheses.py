@@ -1,5 +1,19 @@
 class Solution:
-    def generateParenthesis(self, n: int) -> list[str]:
+    def generateParenthesis(self, n):
+        res = []
+        self.dfs(n, n, "", res)
+        return res
+            
+    def dfs(self, leftRemain, rightRemain, path, res):
+        if leftRemain > rightRemain or leftRemain < 0 or rightRemain < 0:
+            return  # backtracking
+        if leftRemain == 0 and rightRemain == 0:
+            res.append(path)
+            return 
+        self.dfs(leftRemain-1, rightRemain, path+"(", res)
+        self.dfs(leftRemain, rightRemain-1, path+")", res)
+    
+    def generateParenthesis2(self, n: int) -> list[str]:
         dp = [[] for i in range(n + 1)]
         dp[0].append('')
         for i in range(n + 1):
@@ -7,14 +21,5 @@ class Solution:
                 dp[i] += ['(' + x + ')' + y for x in dp[j] for y in dp[i - j - 1]]
         return dp[n]
 
-    # def generateParenthesis(self, n: int) -> list[str]:
-        
-    #     def generate(p, left, right, parens=[]):
-    #         if left:         generate(p + '(', left-1, right)
-    #         if right > left: generate(p + ')', left, right-1)
-    #         if not right:    parens += p,
-    #         return parens
-    #     return generate('', n, n)
-
-s = Solution().generateParenthesis(5)
-print(s, "len: ", len(s))
+s = Solution().generateParenthesis(4)
+print(s)
